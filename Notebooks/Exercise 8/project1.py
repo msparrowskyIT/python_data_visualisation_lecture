@@ -41,18 +41,19 @@ def convert_img():
     global g_weight_input
     global b_weight_input
     
-    img_pixmap = img_lbl.pixmap()
-    if img_pixmap and r_weight_input and g_weight_input and b_weight_input:
-        img = img_pixmap.toImage()
-        r_weight, g_weight, b_weight = float(r_weight_input.text()), float(g_weight_input.text()), float(b_weight_input.text())
-        weights = sum([r_weight, g_weight, b_weight])
-        for w in range(img.width()):
-            for h in range(img.height()):
-                color = img.pixelColor(w, h)
-                new_color = QColor(r_weight/weights*color.red(), g_weight/weights*color.green(), b_weight/weights*color.blue())
-                img.setPixelColor(w, h, new_color) 
+    if(r_weight_input.text() and g_weight_input.text() and b_weight_input.text()):
+        img_pixmap = img_lbl.pixmap()
+        if img_pixmap and r_weight_input and g_weight_input and b_weight_input:
+            img = img_pixmap.toImage()
+            r_weight, g_weight, b_weight = float(r_weight_input.text()), float(g_weight_input.text()), float(b_weight_input.text())
+            weights = sum([r_weight, g_weight, b_weight])
+            for w in range(img.width()):
+                for h in range(img.height()):
+                    color = img.pixelColor(w, h)
+                    new_color = QColor(r_weight/weights*color.red(), g_weight/weights*color.green(), b_weight/weights*color.blue())
+                    img.setPixelColor(w, h, new_color) 
 
-        img_lbl.setPixmap(QPixmap(img))      
+            img_lbl.setPixmap(QPixmap(img))      
 
 img_convert_btn = QPushButton("Convert")
 img_convert_btn.clicked.connect(convert_img)

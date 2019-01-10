@@ -17,7 +17,7 @@ list_delete_grid = QGridLayout()
 list_widget = QListWidget()
 
 def show():
-    list(map(lambda i: list_widget.item(i).setCheckState(Qt.Unchecked), range(list_widget.count())))
+    list(map(lambda i: [list_widget.item(i).setCheckState(Qt.Unchecked), list_widget.item(i).setFlags(Qt.ItemIsSelectable | Qt.ItemIsEditable | Qt.ItemIsEnabled)], range(list_widget.count())))
     list_widget.currentItem().setCheckState(Qt.Checked)
 
     stl_reader = vtk.vtkSTLReader()
